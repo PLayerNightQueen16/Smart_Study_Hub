@@ -126,6 +126,7 @@ No backend or external API required.
 ## 👩‍💻 Author
 
 **Shreya Pal**
+
 Personal Project
 
 ---
