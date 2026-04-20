@@ -1,6 +1,7 @@
 
 import { useQueryClient } from "@tanstack/react-query";
 import {
+  useUpdateResource,
   useUpdateResourceStatus,
   useTogglePin,
   useRateResource,
@@ -74,6 +75,7 @@ const statusConfig = {
 
 export function ResourceCard({ resource }) {
   const queryClient = useQueryClient();
+  const updateResource = useUpdateResource();
   const updateStatus = useUpdateResourceStatus();
   const togglePin = useTogglePin();
   const rateResource = useRateResource();
@@ -91,6 +93,17 @@ export function ResourceCard({ resource }) {
   const typeColor = typeColors[resource.type] ?? "text-slate-400";
   const statusInfo = statusConfig[resource.status] ?? statusConfig.not_started;
   const StatusIcon = statusInfo.icon;
+
+  const cyclePriority = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
+    const order = ["low", "medium", "high", "critical"];
+    const next = order[(order.indexOf(resource.priority) + 1) % 4];
+    updateResource.mutate(
+      { id: resource.id, data: { priority: next } },
+      { onSuccess: invalidateAll }
+    );
+  };
 
   const cycleStatus = (e) => {
     e?.preventDefault();
@@ -142,9 +155,13 @@ export function ResourceCard({ resource }) {
                   <Folder size={11} className="inline-block" />
                   {resource.children?.length || 0} Items
                 </span>
-                <span className={`text-xs px-2 py-0.5 rounded border font-mono ${priorityColors[resource.priority] ?? priorityColors.low}`}>
+                <button
+                  onClick={cyclePriority}
+                  className={`text-xs px-2 py-0.5 rounded border font-mono uppercase tracking-wider hover:opacity-80 transition-opacity ${priorityColors[resource.priority] ?? priorityColors.low}`}
+                  title="Cycle priority"
+                >
                   {resource.priority}
-                </span>
+                </button>
                 <span className={`text-xs flex items-center gap-1 ${statusInfo.color}`}>
                   <StatusIcon size={11} />
                   {statusInfo.label}

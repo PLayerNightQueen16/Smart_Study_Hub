@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-const STORAGE_KEY = "smarthub_resources_v3";
+const STORAGE_KEY = "smarthub_resources_v4";
 
 // Initial seed data
 const getResources = () => {
@@ -51,6 +51,7 @@ const getResources = () => {
       status: "not_started",
       pinned: true,
       notes: "Highly recommended series",
+      lastAccessedAt: "2026-04-15T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
       children: [
@@ -89,6 +90,7 @@ const getResources = () => {
       priority: "medium",
       status: "not_started",
       pinned: false,
+      lastAccessedAt: "2026-04-12T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
       children: [
@@ -151,6 +153,7 @@ const getResources = () => {
       status: "not_started",
       pinned: false,
       notes: "Personal notes from workshop",
+      lastAccessedAt: "2026-04-05T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
       children: []
@@ -165,6 +168,7 @@ const getResources = () => {
       status: "not_started",
       pinned: false,
       notes: "Google ML course - 15 hours total",
+      lastAccessedAt: "2026-04-11T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
       children: [
@@ -224,6 +228,7 @@ const getResources = () => {
       priority: "low",
       status: "not_started",
       pinned: false,
+      lastAccessedAt: "2026-04-13T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
       children: [
@@ -290,7 +295,7 @@ export function useGetDashboardStats() {
 export function useGetNeglectedResources() {
   return useQuery({
     queryKey: getGetNeglectedResourcesQueryKey(),
-    queryFn: () => getResources().filter(r => r.status === "not_started").slice(0, 5)
+    queryFn: () => getResources().filter(r => r.status === "not_started" && (!r.children || r.children.length === 0)).slice(0, 5)
   });
 }
 
