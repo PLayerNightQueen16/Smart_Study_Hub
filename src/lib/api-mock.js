@@ -226,6 +226,7 @@ export const getListResourcesQueryKey = () => ["resources"];
 export const getGetDashboardStatsQueryKey = () => ["dashboardStats"];
 export const getGetNeglectedResourcesQueryKey = () => ["neglected"];
 export const getGetRecentResourcesQueryKey = () => ["recent"];
+export const getGetPinnedResourcesQueryKey = () => ["pinned"];
 export const getGetResourceQueryKey = (id) => ["resource", id];
 export const getGetAnalyticsTrendsQueryKey = () => ["analyticsTrends"];
 
@@ -259,6 +260,16 @@ export function useGetRecentResources() {
   return useQuery({
     queryKey: getGetRecentResourcesQueryKey(),
     queryFn: () => getResources().sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt)).slice(0, 5)
+  });
+}
+
+export function useGetPinnedResources() {
+  return useQuery({
+    queryKey: getGetPinnedResourcesQueryKey(),
+    queryFn: () => getResources()
+      .filter(r => r.pinned)
+      .sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt))
+      .slice(0, 4)
   });
 }
 

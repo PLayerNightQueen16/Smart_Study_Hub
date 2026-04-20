@@ -1,4 +1,4 @@
-import { useGetDashboardStats, useGetNeglectedResources, useGetRecentResources } from "@/lib/api-mock";
+import { useGetDashboardStats, useGetNeglectedResources, useGetRecentResources, useGetPinnedResources } from "@/lib/api-mock";
 import { ResourceCard } from "../components/ResourceCard";
 import {
 
@@ -17,6 +17,7 @@ export function Dashboard() {
   const { data: stats, isLoading: statsLoading } = useGetDashboardStats();
   const { data: neglected } = useGetNeglectedResources();
   const { data: recent } = useGetRecentResources();
+  const { data: pinned } = useGetPinnedResources();
 
   return (
     <div className="p-6 max-w-7xl mx-auto">
@@ -147,6 +148,27 @@ export function Dashboard() {
           </div>
         </> :
       null}
+
+      {pinned && pinned.length > 0 &&
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-semibold text-foreground flex items-center gap-2">
+              <Pin size={15} className="text-primary" />
+              Pinned Resources
+            </h2>
+            <Link href="/resources">
+              <span className="text-xs text-muted-foreground hover:text-primary transition-colors cursor-pointer">
+                View all
+              </span>
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {pinned.map((r) =>
+              <ResourceCard key={r.id} resource={r} />
+            )}
+          </div>
+        </div>
+      }
 
       {neglected && neglected.length > 0 &&
       <div className="mb-8">
