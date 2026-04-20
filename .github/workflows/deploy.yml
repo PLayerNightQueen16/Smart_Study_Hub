@@ -28,7 +28,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm ci
+        run: npm install
       - name: Build
         # We copy index.html to 404.html so GitHub Pages natively falls back to React Router on deep links
         run: npm run build && cp dist/index.html dist/404.html
