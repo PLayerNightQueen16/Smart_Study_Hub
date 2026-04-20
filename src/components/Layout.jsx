@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ConstellationBackground } from "./ConstellationBackground";
-import logo from '/public/logo.jpg';
 import {
   LayoutDashboard,
   Library,
@@ -11,8 +10,7 @@ import {
   PanelLeftOpen,
   Menu,
   X
-} from
-  "lucide-react";
+} from "lucide-react";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -55,7 +53,7 @@ export function Layout({ children }) {
 
           <div className={`py-6 border-b border-border/50 flex flex-col items-center ${collapsed ? "md:px-1" : "px-4"}`}>
             <div className="flex flex-col items-center gap-3 w-full">
-              <img src={logo} alt="LearnOS Logo" className={`${collapsed ? "md:w-12 md:h-12 w-24 h-24" : "w-32 h-32"} shrink-0 object-contain transition-all duration-300`} />
+              <img src="/Smart_Study_Hub/logo.jpg" alt="LearnOS Logo" className={`${collapsed ? "md:w-12 md:h-12 w-24 h-24" : "w-32 h-32"} shrink-0 object-contain transition-all duration-300`} />
               <span className={`text-2xl font-display font-bold text-primary tracking-wide cyan-glow-text ${collapsed ? "md:hidden" : ""}`}>
                 LearnOS
               </span>
