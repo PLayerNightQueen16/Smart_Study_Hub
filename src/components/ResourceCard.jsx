@@ -10,8 +10,9 @@ import {
   getGetDashboardStatsQueryKey,
   getGetNeglectedResourcesQueryKey,
   getGetRecentResourcesQueryKey,
-  getGetPinnedResourcesQueryKey } from
-"@/lib/api-mock";
+  getGetPinnedResourcesQueryKey
+} from
+  "@/lib/api-mock";
 
 import {
   Video,
@@ -30,8 +31,9 @@ import {
   PlayCircle,
   GitBranch,
   Folder,
-  Globe } from
-"lucide-react";
+  Globe
+} from
+  "lucide-react";
 import { Link } from "wouter";
 
 const typeIcons = {
@@ -139,7 +141,7 @@ export function ResourceCard({ resource }) {
   return (
     <div className="glass-panel rounded-lg p-4 hover:border-primary/30 transition-all group relative">
       {resource.pinned &&
-      <div className="absolute top-3 right-3 text-primary/60">
+        <div className="absolute top-3 right-3 text-primary/60">
           <Pin size={12} fill="currentColor" />
         </div>
       }
@@ -171,18 +173,18 @@ export function ResourceCard({ resource }) {
           </div>
 
           {resource.tags.length > 0 &&
-          <div className="flex flex-wrap gap-1 mb-3">
+            <div className="flex flex-wrap gap-1 mb-3">
               {resource.tags.slice(0, 4).map((tag) =>
-            <span
-              key={tag}
-              className="text-xs px-1.5 py-0.5 rounded bg-primary/5 border border-primary/10 text-primary/70 font-mono">
-              
+                <span
+                  key={tag}
+                  className="text-xs px-1.5 py-0.5 rounded bg-primary/5 border border-primary/10 text-primary/70 font-mono">
+
                   {tag}
                 </span>
-            )}
+              )}
               {resource.tags.length > 4 &&
-            <span className="text-xs text-muted-foreground">+{resource.tags.length - 4}</span>
-            }
+                <span className="text-xs text-muted-foreground">+{resource.tags.length - 4}</span>
+              }
             </div>
           }
         </div>
@@ -191,13 +193,12 @@ export function ResourceCard({ resource }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-0.5">
           {[1, 2, 3, 4, 5].map((star) =>
-          <button
-            key={star}
-            onClick={(e) => handleRate(e, star)}
-            className={`transition-colors ${
-            star <= (resource.rating ?? 0) ? "text-yellow-400" : "text-muted-foreground/30 hover:text-yellow-400/50"}`
-            }>
-            
+            <button
+              key={star}
+              onClick={(e) => handleRate(e, star)}
+              className={`transition-colors ${star <= (resource.rating ?? 0) ? "text-yellow-400" : "text-muted-foreground/30 hover:text-yellow-400/50"}`
+              }>
+
               <Star size={11} fill={star <= (resource.rating ?? 0) ? "currentColor" : "none"} />
             </button>
           )}
@@ -208,42 +209,40 @@ export function ResourceCard({ resource }) {
             onClick={cycleStatus}
             className="p-1.5 rounded hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
             title="Cycle status">
-            
+
             <StatusIcon size={13} className={statusInfo.color} />
           </button>
           <button
             onClick={handlePin}
             className={`p-1.5 rounded hover:bg-accent transition-colors ${resource.pinned ? "text-primary" : "text-muted-foreground hover:text-foreground"}`}
             title={resource.pinned ? "Unpin" : "Pin"}>
-            
+
             <Pin size={13} fill={resource.pinned ? "currentColor" : "none"} />
           </button>
           {resource.url &&
-          <a
-            href={resource.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-1.5 rounded hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
-            onClick={(e) => e.stopPropagation()}>
-            
+            <a
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded hover:bg-accent transition-colors text-muted-foreground hover:text-foreground"
+              onClick={(e) => e.stopPropagation()}>
+
               <ExternalLink size={13} />
             </a>
           }
           <button
             onClick={handleDelete}
             className="p-1.5 rounded hover:bg-destructive/10 transition-colors text-muted-foreground hover:text-destructive">
-            
+
             <Trash2 size={13} />
           </button>
         </div>
       </div>
 
-      {resource.lastAccessedAt &&
-      <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground/60">
+      {resource.createdAt &&
+        <div className="flex items-center gap-1 mt-2 text-xs text-muted-foreground/60">
           <Clock size={10} />
-          <span>
-            {new Date(resource.lastAccessedAt).toLocaleDateString()}
-          </span>
+          <span>{new Date(resource.createdAt).toLocaleDateString()}</span>
         </div>
       }
     </div>);
