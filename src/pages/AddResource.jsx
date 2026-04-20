@@ -27,9 +27,10 @@ export function AddResource() {
   const [file, setFile] = useState(null);
 
   const addTag = () => {
-    const tag = tagInput.trim();
-    if (tag && !tags.includes(tag)) {
-      setTags([...tags, tag]);
+    const tagsToAdd = tagInput.split(/[\s,]+/).map(t => t.trim()).filter(Boolean);
+    const newTags = tagsToAdd.filter(t => !tags.includes(t));
+    if (newTags.length > 0) {
+      setTags([...tags, ...newTags]);
     }
     setTagInput("");
   };
@@ -37,7 +38,7 @@ export function AddResource() {
   const removeTag = (tag) => setTags(tags.filter((t) => t !== tag));
 
   const handleTagKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === ",") {
+    if (e.key === "Enter" || e.key === "," || e.key === " ") {
       e.preventDefault();
       addTag();
     }
@@ -197,7 +198,7 @@ export function AddResource() {
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
               onKeyDown={handleTagKeyDown}
-              placeholder="Type a tag, press Enter or comma"
+              placeholder="Type a tag, press space or comma"
               className="flex-1 bg-background/50 border border-border/50 rounded-md px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 transition-colors" />
             
             <button

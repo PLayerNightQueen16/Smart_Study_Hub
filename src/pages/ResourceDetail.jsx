@@ -319,18 +319,31 @@ export function ResourceDetail({ id }) {
   };
 
   const handleAddTagInline = (e) => {
-    e.preventDefault();
-    const tag = newTagInput.trim();
-    if (tag && !resource.tags.includes(tag)) {
-      const updatedTags = [...resource.tags, tag];
-      updateResource.mutate({ id: resourceId, data: { ...resource, tags: updatedTags } }, { onSuccess: invalidateAll });
-      setNewTagInput("");
+    e?.preventDefault();
+    if (!newTagInput.trim()) return;
+
+    const tagsToAdd = newTagInput.split(/[\s,]+/).map(t => t.trim()).filter(Boolean);
+    const currentTags = resource.tags || [];
+    
+    const newUniqueTags = tagsToAdd.filter(t => !currentTags.includes(t));
+    if (newUniqueTags.length > 0) {
+      const updatedTags = [...currentTags, ...newUniqueTags];
+      updateResource.mutate({ id: resourceId, data: { tags: updatedTags } }, { onSuccess: invalidateAll });
     }
+    setNewTagInput("");
   };
 
   const handleRemoveTagInline = (tagToRemove) => {
-    const updatedTags = resource.tags.filter(t => t !== tagToRemove);
-    updateResource.mutate({ id: resourceId, data: { ...resource, tags: updatedTags } }, { onSuccess: invalidateAll });
+    const currentTags = resource.tags || [];
+    const updatedTags = currentTags.filter(t => t !== tagToRemove);
+    updateResource.mutate({ id: resourceId, data: { tags: updatedTags } }, { onSuccess: invalidateAll });
+  };
+
+  const handleTagKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " " || e.key === ",") {
+      e.preventDefault();
+      handleAddTagInline();
+    }
   };
 
   const [isAddingTop, setIsAddingTop] = useState(false);
@@ -491,22 +504,29 @@ export function ResourceDetail({ id }) {
             </div>
 
             <div>
-              <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2">Tags</p>
-              <div className="flex flex-wrap gap-1.5 items-center">
+              <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider mb-2 block">Tags</p>
+              <div className="flex flex-wrap gap-1.5 items-center mb-2">
                 {(resource.tags || []).map((tag) =>
-                  <span key={tag} className="flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-primary/5 border border-primary/10 text-primary/80 font-mono group">
+                  <span key={tag} className="flex items-center gap-1 text-xs px-2 py-0.5 rounded bg-primary/10 border border-primary/20 text-primary font-mono group">
                     {tag}
-                    <button onClick={() => handleRemoveTagInline(tag)} className="opacity-0 group-hover:opacity-100 text-destructive hover:scale-110 transition-all"><X size={10}/></button>
+                    <button type="button" onClick={() => handleRemoveTagInline(tag)} className="text-muted-foreground hover:text-destructive transition-colors"><X size={10}/></button>
                   </span>
                 )}
-                <form onSubmit={handleAddTagInline} className="flex items-center">
-                  <input
-                    value={newTagInput}
-                    onChange={(e) => setNewTagInput(e.target.value)}
-                    placeholder="+ Add tag..."
-                    className="text-xs px-2 py-0.5 rounded border border-dashed border-border/50 bg-transparent text-muted-foreground outline-none focus:border-primary/50 focus:text-foreground w-24 transition-all"
-                  />
-                </form>
+              </div>
+              <div className="flex items-center gap-2 max-w-xs">
+                <input
+                  value={newTagInput}
+                  onChange={(e) => setNewTagInput(e.target.value)}
+                  onKeyDown={handleTagKeyDown}
+                  placeholder="Type tag, press space/comma..."
+                  className="flex-1 bg-background/50 border border-border/50 rounded-md px-3 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary/50 transition-colors"
+                />
+                <button
+                  type="button"
+                  onClick={handleAddTagInline}
+                  className="px-2 py-1.5 rounded-md bg-accent text-foreground text-xs hover:bg-accent/80 transition-colors">
+                  <Plus size={14} />
+                </button>
               </div>
             </div>
 

@@ -271,6 +271,7 @@ export function useCreateResource() {
         id: Date.now(),
         status: "not_started",
         pinned: false,
+        tags: [],
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         children: [],
@@ -356,13 +357,25 @@ export function useGetLearningAnalytics() {
   return useQuery({
     queryKey: getGetAnalyticsTrendsQueryKey(),
     queryFn: () => {
-      return {
-          trends: [
-            { date: "2026-04-10", completed: 1, added: 2 },
-            { date: "2026-04-15", completed: 3, added: 1 }
-          ],
-          summary: { totalFocusTime: 120, completionRate: 80 }
-      }
+      const items = getResources();
+      
+      const tagStats = {};
+      items.forEach(r => {
+        (r.tags || []).forEach(tag => {
+          if (!tagStats[tag]) {
+            tagStats[tag] = { tag, total: 0, completed: 0, inProgress: 0, notStarted: 0 };
+          }
+          tagStats[tag].total += 1;
+          if (r.status === "completed") tagStats[tag].completed += 1;
+          else if (r.status === "in_progress") tagStats[tag].inProgress += 1;
+          else tagStats[tag].notStarted += 1;
+        });
+      });
+      
+      return Object.values(tagStats).map(stat => ({
+        ...stat,
+        completionRate: stat.total > 0 ? Math.round((stat.completed / stat.total) * 100) : 0
+      })).sort((a, b) => b.total - a.total);
     }
   });
 }

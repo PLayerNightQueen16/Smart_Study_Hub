@@ -1,13 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-
-
-
-
-
-
-
-
 export function ConstellationBackground() {
   const canvasRef = useRef(null);
 
@@ -38,7 +30,7 @@ export function ConstellationBackground() {
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.5,
           vy: (Math.random() - 0.5) * 0.5,
-          size: Math.random() * 1.5 + 0.5
+          size: Math.random() * 2 + 1
         });
       }
     };
@@ -69,8 +61,8 @@ export function ConstellationBackground() {
 
           if (dist < 150) {
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 229, 255, ${0.2 * (1 - dist / 150)})`;
-            ctx.lineWidth = 0.5;
+            ctx.strokeStyle = `rgba(0, 229, 255, ${0.4 * (1 - dist / 150)})`;
+            ctx.lineWidth = 1;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
@@ -99,7 +91,7 @@ export function ConstellationBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[-1] opacity-50"
+      className="fixed inset-0 pointer-events-none z-0 opacity-100"
       style={{ background: 'transparent' }} />);
 
 

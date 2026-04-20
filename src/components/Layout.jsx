@@ -17,7 +17,7 @@ export function Layout({ children }) {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="min-h-screen text-foreground relative">
       <ConstellationBackground />
       <div className="relative z-10 flex h-screen overflow-hidden">
         <aside className="w-60 shrink-0 flex flex-col border-r border-border/50 bg-background/80 backdrop-blur-sm">
