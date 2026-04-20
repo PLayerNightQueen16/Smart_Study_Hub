@@ -5,6 +5,7 @@ import path from 'path'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Smart_Study_Hub/',
   plugins: [react(), tailwindcoords()],
   resolve: {
     alias: {

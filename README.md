@@ -109,13 +109,19 @@ No backend or external API required.
 
 ## 📌 Future Enhancements
 
-- Cloud sync / backend integration
-- Spaced repetition reminders for neglected resources
-- Collaborative shared libraries
-- Mobile app version
-- AI-powered resource summarization
-
----
+- Integration with cloud storage and backend infrastructure for persistent, cross-device data management
+- User authentication system with support for multi-device access and personalized profiles
+- Spaced repetition algorithm to surface neglected resources at optimal review intervals
+- Deadline management system for individual resources with native calendar integration
+- Browser extension enabling one-click resource capture directly from any webpage
+- Collaborative shared libraries allowing teams or study groups to curate and access resources collectively
+- Dedicated mobile application for on-the-go access and resource management
+- AI-powered summarization engine to generate concise summaries and key takeaways from saved resources
+- AI-driven quiz generation from resource content to reinforce active recall and retention
+- Daily and weekly learning streak tracking to encourage consistent study habits
+- Exportable progress reports in PDF format for personal review or academic submission
+- Integrated Pomodoro-style focus timer within the resource detail view to support structured study sessions
+- Public learner profiles to showcase curated libraries and completed resources within a community
 
 ## 👩‍💻 Author
 
