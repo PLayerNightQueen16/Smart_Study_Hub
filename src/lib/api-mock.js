@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
-const STORAGE_KEY = "smarthub_resources_v2";
+const STORAGE_KEY = "smarthub_resources_v3";
 
 // Initial seed data
 const getResources = () => {
@@ -22,20 +22,14 @@ const getResources = () => {
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T18:27:46.068Z",
       children: [
-        {
-          id: 101,
-          title: "Introduction to Hooks",
-          type: "link",
-          url: "https://react.dev/reference/react",
-          children: []
-        },
+        { id: 101, title: "Introduction to Hooks", type: "link", url: "https://react.dev/reference/react" },
         {
           id: 102,
           title: "State Management Subfolder",
           type: "folder",
           children: [
-            { id: 1021, title: "Zustand docs", type: "link", url: "https://zustand-demo.pmnd.rs/", children: [] },
-            { id: 1022, title: "Redux Setup Guide", type: "link", url: "https://redux-toolkit.js.org/", children: [] }
+            { id: 1021, title: "Zustand docs", type: "link", url: "https://zustand-demo.pmnd.rs/" },
+            { id: 1022, title: "Redux Setup Guide", type: "link", url: "https://redux-toolkit.js.org/" }
           ]
         },
         {
@@ -43,8 +37,7 @@ const getResources = () => {
           title: "Advanced React cheat sheet.pdf",
           type: "file",
           fileData: "data:application/pdf;base64,JVBERi0xLjcKCjEgMCBvYmogICUgZW50cnkgcG9pbnQKPDwKICAvVHlwZSAvQ2F0YWxvZwogIC9QYWdlcyAyIDAgUgo+PgplbmRvYmoKCjIgMCBvYmoKPDwKICAvVHlwZSAvUGFnZXMKICAvTWVkaWFCb3ggWyAwIDAgMjAwIDIwMCBdCiAgL0NvdW50IDEKICAvS2lkcyBbIDMgMCBSIF0KPj4KZW5kb2JqCgozIDAgb2JqCjw8CiAgL1R5cGUgL1BhZ2UKICAvUGFyZW50IDIgMCBSCiAgL1Jlc291cmNlcyA8PAogICAgL0ZvbnQgPDwKICAgICAgL0YxIDQgMCBSCgkJPDwKICAgICAgICAvVHlwZSAvRm9udAogICAgICAgIC9TdWJ0eXBlIC9UeXBlMQogICAgICAgIC9CYXNlRm9udCAvVGltZXMtUm9tYW4KICAgICAgPj4KICAgID4+CiAgPj4KICAvQ29udGVudHMgNSAwIFIKPj4KZW5kb2JqCgo0IDAgb2JqCjw8CiAgL1R5cGUgL0ZvbnQKICAvU3VidHlwZSAvVHlwZTEKICAvQmFzZUZvbnQgL1RpbWVzLVJvbWFuCj4+CmVuZG9iagoKNSAwIG9iago8PAogIC9MZW5ndGggNzcKPj4Kc3RyZWFtCkJUCjcwIDUwIFRECi9GMSAxMiBUZgpUagoKU0VMRUNURUQgTUlOSU1VTSBVU0VGVUwgUEQKClNUUkVBTSBFTkQKCmVuZHN0cmVhbQplbmRvYmoKCnhyZWYKMCA2CjAwMDAwMDAwMDAgNjU1MzUgZiAKMDAwMDAwMDAxMCAwMDAwMCBuIAowMDAwMDAwMDc5IDAwMDAwIG4gCjAwMDAwMDAxNzMgMDAwMDAgbiAKMDAwMDAwMDMwMSAwMDAwMCBuIAowMDAwMDAwMzk4IDAwMDAwIG4gCnRyYWlsZXIKPDwKICAvU2l6ZSA2CiAgL1Jvb3QgMSAwIFIKPj4Kc3RhcnR4cmVmCjQ5NQolJUVPRgo=",
-          fileName: "Advanced React cheat sheet.pdf",
-          children: []
+          fileName: "Advanced React cheat sheet.pdf"
         }
       ]
     },
@@ -60,7 +53,11 @@ const getResources = () => {
       notes: "Highly recommended series",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 201, title: "System Design Frameworks", type: "course", url: "https://educative.io/courses/grokking-modern-system-design-interview-for-engineers-managers" },
+        { id: 202, title: "ByteByteGo YouTube Channel", type: "video", url: "https://www.youtube.com/@ByteByteGo" },
+        { id: 203, title: "Latency Numbers Every Programmer Should Know", type: "article", url: "https://gist.github.com/jboner/2841832" }
+      ]
     },
     {
       id: 3,
@@ -77,7 +74,11 @@ const getResources = () => {
       completedAt: "2026-04-18T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 301, title: "Type Challenges Repo", type: "github repo", url: "https://github.com/type-challenges/type-challenges" },
+        { id: 302, title: "Utility Types Docs", type: "website", url: "https://www.typescriptlang.org/docs/handbook/utility-types.html" },
+        { id: 303, title: "Matt Pocock TS Tips", type: "video", url: "https://www.youtube.com/@mattpocockuk" }
+      ]
     },
     {
       id: 4,
@@ -90,7 +91,10 @@ const getResources = () => {
       pinned: false,
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 401, title: "Normalization Cheat Sheet", type: "notes", fileData: "data:text/plain;base64,MU5GOiBBdG9taWMgdmFsdWVzCjJORjogTm8gcGFydGlhbCBkZXBlbmRlbmNpZXMKM05GOiBObyB0cmFuc2l0aXZlIGRlcGVuZGVuY2llcw==", fileName: "normalization_notes.txt" },
+        { id: 402, title: "PostgreSQL Documentation", type: "website", url: "https://www.postgresql.org/docs/" }
+      ]
     },
     {
       id: 5,
@@ -105,7 +109,18 @@ const getResources = () => {
       lastAccessedAt: "2026-04-18T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { 
+          id: 501, 
+          title: "Chapter 4: Trees & Graphs", 
+          type: "folder", 
+          children: [
+            { id: 5011, title: "Graph Traversal BFS/DFS", type: "video", url: "https://youtube.com" },
+            { id: 5012, title: "Blind 75 Leetcode Hub", type: "github repo", url: "https://github.com/ashishps1/awesome-leetcode-resources" }
+          ]
+        },
+        { id: 502, title: "Chapter 5: Bit Manipulation", type: "folder", children: [] }
+      ]
     },
     {
       id: 6,
@@ -122,7 +137,10 @@ const getResources = () => {
       completedAt: "2026-04-12T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 601, title: "CSS Grid Garden Game", type: "website", url: "https://cssgridgarden.com/" },
+        { id: 602, title: "Grid vs Flexbox comparison video", type: "video", url: "https://youtube.com/watch?v=hs3piaN4b5I" }
+      ]
     },
     {
       id: 7,
@@ -149,7 +167,11 @@ const getResources = () => {
       notes: "Google ML course - 15 hours total",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 801, title: "TensorFlow Setup Guide", type: "website", url: "https://www.tensorflow.org/install" },
+        { id: 802, title: "Kaggle Dataset Hub", type: "website", url: "https://www.kaggle.com/datasets" },
+        { id: 803, title: "Mathematics for Machine Learning", type: "book", url: "https://mml-book.github.io/" }
+      ]
     },
     {
       id: 9,
@@ -165,7 +187,17 @@ const getResources = () => {
       lastAccessedAt: "2026-04-16T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { 
+          id: 901, 
+          title: "K8s Config Files", 
+          type: "folder", 
+          children: [
+            { id: 9011, title: "sample_deployment.yaml", type: "notes", fileData: "data:text/plain;base64,YXBpVmVyc2lvbjogYXBwcy92MQpraW5kOiBEZXBsb3ltZW50Cm1ldGFkYXRhOgogIG5hbWU6IG5naW54LWRlcGxveW1lbnQ=", fileName: "sample_deployment.yaml" }
+          ] 
+        },
+        { id: 902, title: "Docker Networking explained", type: "article", url: "https://docs.docker.com/network/" }
+      ]
     },
     {
       id: 10,
@@ -194,7 +226,10 @@ const getResources = () => {
       pinned: false,
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 1101, title: "Apollo Server Quickstart", type: "github repo", url: "https://github.com/apollographql/apollo-server" },
+        { id: 1102, title: "GraphQL vs REST", type: "video", url: "https://www.youtube.com/watch?v=yWzKJPw_VzM" }
+      ]
     },
     {
       id: 12,
@@ -211,7 +246,10 @@ const getResources = () => {
       completedAt: "2026-04-01T15:22:52.627Z",
       createdAt: "2026-04-19T15:22:52.627Z",
       updatedAt: "2026-04-19T15:22:52.627Z",
-      children: []
+      children: [
+        { id: 1201, title: "Tailwind UI Components", type: "website", url: "https://tailwindui.com" },
+        { id: 1202, title: "JIT Compiler deep dive", type: "article", url: "https://tailwindcss.com/blog/just-in-time-the-next-generation-of-tailwind-css" }
+      ]
     }
   ];
   localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));

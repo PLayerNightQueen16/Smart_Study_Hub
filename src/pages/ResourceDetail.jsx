@@ -11,6 +11,7 @@ import {
   getGetDashboardStatsQueryKey,
   getGetNeglectedResourcesQueryKey,
   getGetRecentResourcesQueryKey,
+  getGetPinnedResourcesQueryKey,
   getGetResourceQueryKey } from
 "@/lib/api-mock";
 import { useQueryClient } from "@tanstack/react-query";
@@ -246,6 +247,7 @@ export function ResourceDetail({ id }) {
     queryClient.invalidateQueries({ queryKey: getGetDashboardStatsQueryKey() });
     queryClient.invalidateQueries({ queryKey: getGetNeglectedResourcesQueryKey() });
     queryClient.invalidateQueries({ queryKey: getGetRecentResourcesQueryKey() });
+    queryClient.invalidateQueries({ queryKey: getGetPinnedResourcesQueryKey() });
     queryClient.invalidateQueries({ queryKey: getGetResourceQueryKey(resourceId) });
   };
 

@@ -30,8 +30,8 @@ export function ConstellationBackground() {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (isFree ? 0.15 : 0.4),
-          vy: (Math.random() - 0.5) * (isFree ? 0.15 : 0.4),
+          vx: (Math.random() - 0.5) * (isFree ? 0.3 : 0.8),
+          vy: (Math.random() - 0.5) * (isFree ? 0.3 : 0.8),
           size: Math.random() * (isFree ? 1.5 : 2.5) + (isFree ? 0.5 : 1),
           isFree: isFree,
           baseAlpha: Math.random() * 0.3 + (isFree ? 0.3 : 0.6),

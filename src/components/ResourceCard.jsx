@@ -8,7 +8,8 @@ import {
   getListResourcesQueryKey,
   getGetDashboardStatsQueryKey,
   getGetNeglectedResourcesQueryKey,
-  getGetRecentResourcesQueryKey } from
+  getGetRecentResourcesQueryKey,
+  getGetPinnedResourcesQueryKey } from
 "@/lib/api-mock";
 
 import {
@@ -83,6 +84,7 @@ export function ResourceCard({ resource }) {
     queryClient.invalidateQueries({ queryKey: getGetDashboardStatsQueryKey() });
     queryClient.invalidateQueries({ queryKey: getGetNeglectedResourcesQueryKey() });
     queryClient.invalidateQueries({ queryKey: getGetRecentResourcesQueryKey() });
+    queryClient.invalidateQueries({ queryKey: getGetPinnedResourcesQueryKey() });
   };
 
   const TypeIcon = typeIcons[resource.type] ?? FileText;
@@ -90,7 +92,9 @@ export function ResourceCard({ resource }) {
   const statusInfo = statusConfig[resource.status] ?? statusConfig.not_started;
   const StatusIcon = statusInfo.icon;
 
-  const cycleStatus = () => {
+  const cycleStatus = (e) => {
+    e?.preventDefault();
+    e?.stopPropagation();
     const statusOrder = ["not_started", "in_progress", "completed"];
     const next = statusOrder[(statusOrder.indexOf(resource.status) + 1) % 3];
     updateStatus.mutate(
@@ -100,19 +104,22 @@ export function ResourceCard({ resource }) {
   };
 
   const handlePin = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
+    e?.stopPropagation();
     togglePin.mutate({ id: resource.id }, { onSuccess: invalidateAll });
   };
 
   const handleDelete = (e) => {
-    e.preventDefault();
+    e?.preventDefault();
+    e?.stopPropagation();
     if (confirm("Delete this resource?")) {
       deleteResource.mutate({ id: resource.id }, { onSuccess: invalidateAll });
     }
   };
 
   const handleRate = (e, rating) => {
-    e.preventDefault();
+    e?.preventDefault();
+    e?.stopPropagation();
     rateResource.mutate({ id: resource.id, data: { rating } }, { onSuccess: invalidateAll });
   };
 
