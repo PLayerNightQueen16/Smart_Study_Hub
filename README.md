@@ -16,12 +16,14 @@ It focuses on **nested resource organization, progress tracking, and learning an
 
 ## 🧩 Features
 
+- 🔐 **Secure Authentication** — Firebase-powered Sign In, Sign Up, and Password Recovery with manual login enforcement.
 - 📚 **Resource Library** — Add articles, videos, books, courses, PDFs, GitHub repos, and websites with type, priority, status, tags, notes, and file uploads
 - 🗂️ **Nested File Tree** — Organize resources into folders with infinitely nestable links, files, and subfolders
 - 📊 **Learning Analytics** — Visual breakdowns by status, type, and topic tags using interactive charts
 - 📌 **Pin & Rate** — Star-rate and pin your most important resources for quick access
 - 🔍 **Filter & Sort** — Search, filter by type / status / tag, and sort across your entire library
-- 💾 **Local-first** — All data stored in `localStorage`, no backend or build server required
+- 📱 **Fully Responsive** — Optimized UI experience across all device sizes (mobile, tablet, desktop)
+- 🔔 **Smart Notifications** — Interactive toast notification system with automatic timeouts and system-themed messaging
 - 🌌 **Constellation UI** — Animated particle background with glassmorphism panels and a techy aesthetic
 
 ---
@@ -34,12 +36,13 @@ Smart-Study-Hub/
 ├── index.html               # App entry point
 │
 ├── src/
-│   ├── App.jsx              # Root component & routing
+│   ├── App.jsx              # Root component & Authentication Routing
 │   ├── main.jsx             # React DOM entry
 │   ├── index.css            # Global styles & theme tokens
 │   ├── App.css              # App-level styles
 │   │
 │   ├── pages/
+│   │   ├── Auth.jsx         # Secure Gateway (Sign In / Sign Up / Forgot Password)
 │   │   ├── Dashboard.jsx    # Command center with stats & summaries
 │   │   ├── Library.jsx      # Full resource list with filters
 │   │   ├── AddResource.jsx  # Resource creation form
@@ -54,6 +57,7 @@ Smart-Study-Hub/
 │   │   └── ui/                     # shadcn/ui primitives
 │   │
 │   ├── lib/
+│   │   ├── firebase.js      # Firebase Initialization & Auth Config
 │   │   ├── api-mock.js      # localStorage CRUD + TanStack Query hooks
 │   │   └── utils.js         # Utility helpers
 │   │
@@ -71,6 +75,7 @@ Smart-Study-Hub/
 
 - **React 19** — Component architecture & state management
 - **Vite** — Lightning-fast dev server and build tool
+- **Firebase** — Authentication gateway & cloud infrastructure
 - **Tailwind CSS v4** — Utility-first styling with custom theme tokens
 - **TanStack Query** — Server-state management & cache invalidation
 - **Recharts** — Interactive charts for analytics
@@ -79,7 +84,7 @@ Smart-Study-Hub/
 - **Framer Motion** — Animations & transitions
 - **Canvas API** — Constellation particle background
 
-No backend or external API required.
+Requires a Firebase project configuration (see `.env.example`).
 
 ---
 
@@ -100,17 +105,17 @@ No backend or external API required.
 
 ## 🧠 Design Decisions
 
-- **No backend required** — All logic and data runs client-side via `localStorage`
+- **Hybrid Storage Model** — Combines Firebase for secure user sessions with `localStorage` for high-performance resource management.
+- **Manual Authentication Flow** — Enforces a manual login step after account creation to ensure credential verification and session security.
 - **Nested resource model** — Resources can contain folders, links, and files at any depth
-- **Query invalidation pattern** — TanStack Query used even for local data to keep UI reactive
-- **Forced dark theme** — CSS variables locked to dark mode for the intended aesthetic
+- **Responsive-first design** — Every component is built with a mobile-first approach, ensuring a premium experience on any screen.
+- **Forced dark theme** — CSS variables locked to dark mode with glassmorphic accents for the intended aesthetic.
 
 ---
 
 ## 📌 Future Enhancements
 
 - Integration with cloud storage and backend infrastructure for persistent, cross-device data management
-- User authentication system with support for multi-device access and personalized profiles
 - Spaced repetition algorithm to surface neglected resources at optimal review intervals
 - Deadline management system for individual resources with native calendar integration
 - Browser extension enabling one-click resource capture directly from any webpage
