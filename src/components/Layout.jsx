@@ -9,8 +9,11 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Menu,
-  X
+  X,
+  LogOut
 } from "lucide-react";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: LayoutDashboard },
@@ -22,6 +25,14 @@ export function Layout({ children }) {
   const [location] = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   return (
     <div className="min-h-screen text-foreground relative">
@@ -88,7 +99,7 @@ export function Layout({ children }) {
             })}
           </nav>
 
-          <div className="px-3 pb-4 pt-2">
+          <div className="px-3 pb-6 pt-2 space-y-1">
             <Link href="/resources/new" onClick={() => setMobileMenuOpen(false)}>
               <div
                 className={`flex items-center gap-2 py-2.5 rounded-md bg-primary/10 border border-primary/30 text-primary text-sm font-medium hover:bg-primary/20 transition-all cursor-pointer ${collapsed ? "md:justify-center md:px-0" : "px-3"}`}
@@ -98,6 +109,15 @@ export function Layout({ children }) {
                 <span className={collapsed ? "md:hidden" : ""}>Add Resource</span>
               </div>
             </Link>
+            
+            <button
+              onClick={handleSignOut}
+              className={`w-full flex items-center gap-2 py-2.5 rounded-md text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-all cursor-pointer ${collapsed ? "md:justify-center md:px-0" : "px-3"}`}
+              title={collapsed ? "Sign Out / Switch Account" : undefined}
+            >
+              <LogOut size={16} className="shrink-0" />
+              <span className={`text-sm font-medium ${collapsed ? "md:hidden" : ""}`}>Sign Out</span>
+            </button>
           </div>
         </aside>
         
